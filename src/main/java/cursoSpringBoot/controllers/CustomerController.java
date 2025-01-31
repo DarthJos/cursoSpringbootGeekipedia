@@ -26,6 +26,7 @@ public class CustomerController {
     @GetMapping("/clientes/{username}")
     public Customer getCliente(@PathVariable String username) {
         System.out.println("Solicitud ejecutada --> getCliente()");
+
         for (Customer customer:customers) {
             if (customer.getUsername().equalsIgnoreCase(username)){
                 System.out.println("\t* Usuario encontrado: " + customer.getName());
@@ -37,7 +38,26 @@ public class CustomerController {
 
     @PostMapping("/clientes")
     public Customer postCliente(@RequestBody Customer customer) {
+        System.out.println("Solicitud ejecutada --> postCliente()");
         customers.add(customer);
         return customer;
+    }
+
+    @PutMapping("/clientes")
+    public Customer putCliente(@RequestBody Customer modified_customer) {
+        System.out.println("Solicitud ejecutada --> putCliente()");
+
+        for (Customer customer: customers) {
+            if (customer.getID() == modified_customer.getID()) {
+                System.out.println("* Usuario encontrado... actualizando...");
+                customer.setName(modified_customer.getName());
+                customer.setUsername(modified_customer.getUsername());
+                customer.setPassword(modified_customer.getPassword());
+
+                return customer;
+            }
+        }
+        System.out.println("* Cliente no encontrado...");
+        return null;
     }
 }
