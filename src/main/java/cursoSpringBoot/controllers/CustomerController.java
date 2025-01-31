@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
+@RequestMapping("/clientes")    // <-- Prefijo que unifica las rutas de los endpoints
 public class CustomerController {
 
     private List<Customer> customers = new ArrayList<>(Arrays.asList(
@@ -17,13 +18,15 @@ public class CustomerController {
             new Customer(890, "Irma Campos", "Chapis", "password123")
     ));
 
-    @GetMapping("/clientes")
+    //@GetMapping
+    @RequestMapping(method = RequestMethod.GET)
     public List<Customer> getCustomers() {
         System.out.println("Solicitud ejecutada --> getCustomers()");
         return customers;
     }
 
-    @GetMapping("/clientes/{username}")
+    //@GetMapping("/{username}")
+    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
     public Customer getCliente(@PathVariable String username) {
         System.out.println("Solicitud ejecutada --> getCliente()");
 
@@ -36,14 +39,16 @@ public class CustomerController {
         return null;
     }
 
-    @PostMapping("/clientes")
+    //@PostMapping
+    @RequestMapping(method = RequestMethod.POST)
     public Customer postCliente(@RequestBody Customer customer) {
         System.out.println("Solicitud ejecutada --> postCliente()");
         customers.add(customer);
         return customer;
     }
 
-    @PutMapping("/clientes")
+    //@PutMapping
+    @RequestMapping(method = RequestMethod.PUT)
     public Customer putCliente(@RequestBody Customer modified_customer) {
         System.out.println("Solicitud ejecutada --> putCliente()");
 
@@ -61,7 +66,8 @@ public class CustomerController {
         return null;
     }
 
-    @DeleteMapping("/clientes/{idToDelete}")
+    //@DeleteMapping("/{idToDelete}")
+    @RequestMapping(value = "/{idToDelete}", method = RequestMethod.DELETE)
     public Customer deleteCliente(@PathVariable int idToDelete) {
         System.out.println("Solicitud ejecutada --> putCliente()");
 
@@ -75,7 +81,8 @@ public class CustomerController {
         return null;
     }
 
-    @PatchMapping("/clientes")
+    //@PatchMapping
+    @RequestMapping(method = RequestMethod.PATCH)
     public Customer patchCliente(@RequestBody Customer customerToPatch) {
         System.out.println("Solicitud ejecutada --> patchCliente()");
 
