@@ -60,4 +60,17 @@ public class CustomerController {
         System.out.println("* Cliente no encontrado...");
         return null;
     }
+
+    @DeleteMapping("/clientes/{idToDelete}")
+    public Customer deleteCliente(@PathVariable int idToDelete) {
+        System.out.println("Solicitud ejecutada --> putCliente()");
+        for (Customer customer: customers) {
+            if (customer.getID() == idToDelete) {
+                customers.remove(customer);
+                return customer;
+            }
+        }
+
+        return null;
+    }
 }
