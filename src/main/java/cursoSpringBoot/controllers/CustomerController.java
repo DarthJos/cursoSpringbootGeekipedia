@@ -64,6 +64,7 @@ public class CustomerController {
     @DeleteMapping("/clientes/{idToDelete}")
     public Customer deleteCliente(@PathVariable int idToDelete) {
         System.out.println("Solicitud ejecutada --> putCliente()");
+
         for (Customer customer: customers) {
             if (customer.getID() == idToDelete) {
                 customers.remove(customer);
@@ -71,6 +72,29 @@ public class CustomerController {
             }
         }
 
+        return null;
+    }
+
+    @PatchMapping("/clientes")
+    public Customer patchCliente(@RequestBody Customer customerToPatch) {
+        System.out.println("Solicitud ejecutada --> patchCliente()");
+
+        for (Customer customer: customers) {
+            if (customer.getID() == customerToPatch.getID()) {
+                System.out.println("* Usuario encontrado... actualizando...");
+                if (customerToPatch.getName() != null){
+                    customer.setName(customerToPatch.getName());
+                }
+                if (customerToPatch.getUsername() != null){
+                    customer.setUsername((customerToPatch.getUsername()));
+                }
+                if (customerToPatch.getPassword() != null){
+                    customer.setPassword((customerToPatch.getPassword()));
+                }
+                return customer;
+            }
+        }
+        System.out.println("* No se encontró al usuario solicitado.");
         return null;
     }
 }
