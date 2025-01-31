@@ -12,9 +12,9 @@ public class CustomerController {
 
     private List<Customer> customers = new ArrayList<>(Arrays.asList(
             new Customer(123, "Josimar Reyes", "DarthJos", "contrasena123"),
-            new Customer(123, "Giselle Rodriguez", "Givrosan", "clave123"),
-            new Customer(123, "Luna Carolina Reyes", "LaLuna", "secreto123"),
-            new Customer(123, "Irma Campos", "Chapis", "password123")
+            new Customer(345, "Giselle Rodriguez", "Givrosan", "clave123"),
+            new Customer(567, "Luna Carolina Reyes", "LaLuna", "secreto123"),
+            new Customer(890, "Irma Campos", "Chapis", "password123")
     ));
 
     @GetMapping("/clientes")
